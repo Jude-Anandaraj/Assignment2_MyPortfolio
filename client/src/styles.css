@@ -1,0 +1,635 @@
+/* Colors, fonts, and shadow used across the whole site */
+:root {
+  --paper: #101214;
+  --paper-raised: #181b21;
+  --ink: #f2eee6;
+  --ink-soft: #b8b3a8;
+  --line: #2c3138;
+  --pine: #e08a3c;
+  --pine-deep: #090b0d;
+  --copper: #e08a3c;
+  --copper-deep: #f0b27a;
+  --error: #ff8a70;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  --serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+  --sans: "Outfit", "Segoe UI", sans-serif;
+}
+
+/* Base styles for the page, images, links, and headings */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(224, 138, 60, 0.12), transparent 32rem),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--copper-deep);
+}
+
+h1,
+h2,
+h3,
+.brand-name,
+.logo text {
+  font-family: var(--serif);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  margin: 0.15em 0 0.3em;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  line-height: 0.98;
+}
+
+h2 {
+  margin: 0 0 0.4em;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.1;
+}
+
+h3 {
+  margin: 1.1em 0 0.3em;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+/* Hidden link that appears when keyboard users press Tab */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  background: var(--copper);
+  color: #101214;
+  padding: 0.5rem 0.8rem;
+  z-index: 5;
+}
+
+.skip-link:focus {
+  top: 0.6rem;
+}
+
+/* Header, logo, and navigation bar */
+.site-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 6vw;
+  background: rgba(16, 18, 20, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand-name {
+  font-size: 1.15rem;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+}
+
+.logo polygon {
+  fill: var(--copper);
+}
+
+.logo text {
+  fill: #101214;
+  font-size: 18px;
+  font-weight: 680;
+}
+
+.nav-toggle {
+  display: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+  font: 600 1rem var(--sans);
+  cursor: pointer;
+}
+
+.site-nav {
+  display: flex;
+  gap: 0.3rem 1.1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link.is-active {
+  border-bottom-color: var(--copper);
+  color: var(--copper-deep);
+}
+
+/* Main content area and footer */
+.site-main {
+  flex: 1;
+  width: min(1080px, calc(100% - 10vw));
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+.site-footer {
+  padding: 1.4rem 6vw 1.8rem;
+  background: var(--pine-deep);
+  color: #efe7da;
+}
+
+.site-footer p {
+  margin: 0.15rem 0;
+}
+
+.site-footer a {
+  color: #f3efe6;
+}
+
+/* Page headings and small labels above them */
+.page-intro {
+  max-width: 40rem;
+  margin-bottom: 2rem;
+}
+
+.kicker {
+  margin: 0 0 0.4rem;
+  color: var(--copper-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.kicker-light {
+  color: var(--copper-deep);
+}
+
+.lede {
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+}
+
+/* Home page: welcome section */
+.hero {
+  padding-bottom: 1rem;
+}
+
+.hero-actions,
+.button,
+.text-link {
+  margin-right: 0.6rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.75rem 1.15rem;
+  background: var(--pine);
+  color: #101214;
+  font: 600 1rem var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(1.08);
+}
+
+.button-ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+.button-ghost:hover {
+  box-shadow: inset 0 0 0 1.5px var(--copper);
+  color: var(--copper-deep);
+}
+
+.text-link {
+  color: var(--copper-deep);
+  font-weight: 600;
+}
+
+/* Home page: mission statement */
+.mission {
+  margin: 2.5rem 0;
+  padding: 1.8rem 1.6rem;
+  background: #14171c;
+  color: var(--ink);
+  border-radius: 18px;
+  border-left: 4px solid var(--copper);
+}
+
+.mission h2,
+.mission p {
+  color: inherit;
+}
+
+.mission blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.25;
+}
+
+/* Cards: page links on Home, services, projects, contact panel, and receipt */
+.home-routes,
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.route-card,
+.service-card,
+.project-card,
+.contact-panel,
+.receipt {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.route-card {
+  display: block;
+  padding: 1.2rem 1.2rem 1.3rem;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.route-card:hover,
+.project-card:hover,
+.service-card:hover {
+  border-color: var(--copper);
+  transform: translateY(-2px);
+}
+
+.route-card span {
+  color: var(--copper);
+  font-family: var(--serif);
+  font-size: 1.3rem;
+}
+
+.route-card strong {
+  display: block;
+  margin: 0.4rem 0;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+}
+
+.route-card p,
+.service-card p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* Two-column layouts on About and Contact, then Projects, Services, and Education */
+.about-layout,
+.contact-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.portrait {
+  margin: 0;
+}
+
+.portrait img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #14171c;
+}
+
+.portrait figcaption {
+  margin-top: 0.7rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.skill-list,
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-list li,
+.course-list li {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: #23282f;
+  font-size: 0.92rem;
+}
+
+.project-list,
+.education-list {
+  display: grid;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) 1.2fr;
+  overflow: hidden;
+}
+
+.project-card img,
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 220px;
+}
+
+.project-copy {
+  padding: 1.3rem 1.4rem 1.5rem;
+}
+
+.service-grid {
+  margin-top: 0.5rem;
+}
+
+.service-card {
+  overflow: hidden;
+}
+
+.service-card img {
+  height: 180px;
+  object-fit: cover;
+}
+
+.service-card h2,
+.service-card p {
+  margin-left: 1.1rem;
+  margin-right: 1.1rem;
+}
+
+.service-card h2 {
+  margin-top: 1rem;
+}
+
+.service-card p {
+  margin-bottom: 1.2rem;
+}
+
+.services-note {
+  margin-top: 1.4rem;
+}
+
+.education-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.2rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.education-years {
+  margin: 0;
+  color: var(--copper-deep);
+  font-weight: 600;
+}
+
+.education-program {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  margin-top: -0.3rem;
+}
+
+/* Contact page: contact details panel */
+.contact-panel {
+  padding: 1.3rem 1.3rem 1.5rem;
+  background: #14171c;
+  color: var(--ink);
+  border-color: var(--copper);
+}
+
+.contact-panel h2,
+.contact-panel a,
+.contact-panel dt,
+.contact-panel dd {
+  color: inherit;
+}
+
+.contact-panel dl {
+  margin: 0;
+}
+
+.contact-panel dt {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper-deep);
+}
+
+.contact-panel dd {
+  margin: 0.15rem 0 0;
+}
+
+/* Contact page: form and error messages */
+.contact-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.form-row label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #4a525c;
+  border-radius: 12px;
+  padding: 0.75rem 0.85rem;
+  background: #0c0e10;
+  color: var(--ink);
+  font: 400 1rem var(--sans);
+}
+
+input:focus,
+textarea:focus,
+.button:focus-visible,
+.nav-link:focus-visible,
+.nav-toggle:focus-visible,
+.route-card:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 2px;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.field-error {
+  margin: 0.35rem 0 0;
+  color: var(--error);
+  font-size: 0.92rem;
+}
+
+/* Home page: message shown after the contact form is sent */
+.receipt {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+  padding: 1.2rem 1.3rem;
+  border-color: var(--copper);
+}
+
+.receipt h2 {
+  font-size: 1.7rem;
+}
+
+.receipt-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.receipt-list div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 0.6rem;
+}
+
+.receipt-list dt {
+  font-weight: 600;
+}
+
+.receipt-list dd {
+  margin: 0;
+}
+
+/* Small screens: one column and a Menu button for the navigation */
+@media (max-width: 800px) {
+  .nav-toggle {
+    display: inline-block;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.4rem 6vw 0.9rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header {
+    flex-wrap: wrap;
+  }
+
+  .about-layout,
+  .contact-layout,
+  .project-card,
+  .education-item,
+  .home-routes,
+  .service-grid,
+  .receipt-list div,
+  .name-row {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card img,
+  .service-card img {
+    height: 210px;
+  }
+}
