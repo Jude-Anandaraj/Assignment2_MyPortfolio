@@ -1,14 +1,24 @@
+import config from "./config/config.js";
 import app from "./server/express.js";
-import router from "./server/assets-router.js";
+import mongoose from "mongoose";
 
-app.use("/src", router);
-
-app.use("/", function (req, res) {
-  res.send("Welcome to User application");
+// Connect to my MongoDB database (Portfolio)
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoUri).then(() => {
+  console.log("Connected to the database!");
+});
+mongoose.connection.on("error", () => {
+  throw new Error(`unable to connect to database: ${config.mongoUri}`);
 });
 
-app.listen(3000);
+// Home route of the backend
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to My Portfolio application." });
+});
 
-console.log("Server running at http://localhost:3000/");
-
-export default app;
+app.listen(config.port, (err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.info("Server started on port %s.", config.port);
+});
