@@ -19,10 +19,13 @@ const getErrorMessage = (err) => {
 const getUniqueErrorMessage = (err) => {
   let output;
   try {
-    let fieldName = err.message.substring(
-      err.message.lastIndexOf(".$") + 2,
-      err.message.lastIndexOf("_1")
-    );
+    // Newer MongoDB versions put the duplicated field in err.keyValue, e.g. { email: "..." }
+    let fieldName = err.keyValue
+      ? Object.keys(err.keyValue)[0]
+      : err.message.substring(
+          err.message.lastIndexOf(".$") + 2,
+          err.message.lastIndexOf("_1")
+        );
     output =
       fieldName.charAt(0).toUpperCase() +
       fieldName.slice(1) +

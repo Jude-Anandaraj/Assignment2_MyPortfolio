@@ -1,6 +1,8 @@
 import User from "../models/user.model.js";
 import extend from "lodash/extend.js";
-import errorHandler from "./error.controller.js";
+import errorHandler from "../helpers/dbErrorHandler.js";
+
+// POST api/users - add new user (sign up)
 const create = async (req, res) => {
   const user = new User(req.body);
   try {
@@ -14,6 +16,8 @@ const create = async (req, res) => {
     });
   }
 };
+
+// GET api/users - get all users (only the name, email and dates, not the password)
 const list = async (req, res) => {
   try {
     let users = await User.find().select("name email updated created");
@@ -24,6 +28,8 @@ const list = async (req, res) => {
     });
   }
 };
+
+// Finds the user with the id in the url and puts it in req.profile
 const userByID = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
@@ -39,11 +45,15 @@ const userByID = async (req, res, next, id) => {
     });
   }
 };
+
+// GET api/users/:id - get user by id
 const read = (req, res) => {
   req.profile.hashed_password = undefined;
   req.profile.salt = undefined;
   return res.json(req.profile);
 };
+
+// PUT api/users/:id - update user by id
 const update = async (req, res) => {
   try {
     let user = req.profile;
@@ -59,6 +69,8 @@ const update = async (req, res) => {
     });
   }
 };
+
+// DELETE api/users/:id - remove user by id
 const remove = async (req, res) => {
   try {
     let user = req.profile;
@@ -72,4 +84,20 @@ const remove = async (req, res) => {
     });
   }
 };
-export default { create, userByID, read, list, remove, update };
+
+// DELETE api/users - remove all users
+const removeAll = async (req, res) => {
+  try {
+    let result = await User.deleteMany({});
+    res.json({
+      message: "All users deleted",
+      deletedCount: result.deletedCount,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
+
+export default { create, userByID, read, list, remove, removeAll, update };
