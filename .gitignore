@@ -4,3 +4,4 @@ client/dist
 .history
 .DS_Store
 *.log
+.env
