@@ -1,20 +1,21 @@
 import express from "express";
 import projectCtrl from "../controllers/project.controller.js";
+import authCtrl from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
-// CRUD routes for projects
+// Protected routes - every projects route needs a signed in user
 router
   .route("/api/projects")
-  .get(projectCtrl.list)
-  .post(projectCtrl.create)
-  .delete(projectCtrl.removeAll);
+  .get(authCtrl.requireSignin, projectCtrl.list)
+  .post(authCtrl.requireSignin, projectCtrl.create)
+  .delete(authCtrl.requireSignin, projectCtrl.removeAll);
 
 router
   .route("/api/projects/:projectId")
-  .get(projectCtrl.read)
-  .put(projectCtrl.update)
-  .delete(projectCtrl.remove);
+  .get(authCtrl.requireSignin, projectCtrl.read)
+  .put(authCtrl.requireSignin, projectCtrl.update)
+  .delete(authCtrl.requireSignin, projectCtrl.remove);
 
 router.param("projectId", projectCtrl.projectByID);
 

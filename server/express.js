@@ -7,6 +7,7 @@ import helmet from "helmet";
 
 // Import all API routes
 import userRoutes from "./routes/user.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import projectRoutes from "./routes/project.routes.js";
 import qualificationRoutes from "./routes/qualification.routes.js";
@@ -34,6 +35,7 @@ app.use(compress());
 
 // Register all API routes 
 app.use("/", userRoutes);
+app.use("/", authRoutes);
 app.use("/", contactRoutes);
 app.use("/", projectRoutes);
 app.use("/", qualificationRoutes);
@@ -41,6 +43,12 @@ app.use("/", qualificationRoutes);
 // Global error handler
 app.use((err, req, res, next) => {
   console.error("Express error:", err);
+
+  if (err.name === "UnauthorizedError") {
+    return res.status(401).json({
+      error: "Unauthorized access"
+    });
+  }
 
   const status =
     err.status >= 400 && err.status < 600
